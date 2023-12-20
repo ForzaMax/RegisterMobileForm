@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./script.js" defer type="module"></script>
+  </head>
+  <body>
+    <div class="content">
+      <img src="./img/content-img.svg" alt="" class="content__picture" />
+
+      <div class="content__wrapper">
+        <h1 class="content__title">Welcome</h1>
+        <p class="content__text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod
+        </p>
+        <div class="content__buttons">
+          <button class="content__button button button-reg">
+            Create Account
+          </button>
+          <button class="content__button button button-log">Login</button>
+        </div>
+        <p class="content__copyright">All Right Reserved @2021</p>
+      </div>
+
+      <div class="content__modal modal modal-register">
+        <h2 class="modal__title">Hello... <span>Register</span></h2>
+        <img class="modal__icon" src="./img/сlose.svg" alt="" />
+        <form class="modal__form form" id="form-reg" action="">
+          <div class="form__box">
+            <input
+              class="form__input"
+              type="text"
+              name="email"
+              placeholder="username/email"
+              data-max-length="10"
+              data-min-length="2"
+            />
+            <label class="form__label" for="email">username/email</label>
+          </div>
+          <div class="form__box">
+            <input
+              class="form__input"
+              type="text"
+              name="course"
+              placeholder="course"
+              data-max-length="10"
+              data-min-length="2"
+            />
+            <label class="form__label" for="course">course</label>
+          </div>
+
+          <div class="form__box">
+            <input
+              class="form__input"
+              type="password"
+              name="password"
+              placeholder="password"
+              data-min-length="6"
+              data-max-length="16"
+            />
+            <label class="form__label" for="password">password</label>
+            <img class="form__lock" src="./img/lock.svg" alt="" />
+          </div>
+
+          <div class="form__box">
+            <input
+              class="form__input"
+              type="password"
+              name="confirm-password"
+              placeholder="confirm password"
+              data-min-length="8"
+              data-max-length="16"
+            />
+            <label class="form__label" for="confirm-password"
+              >confirm password</label
+            >
+            <img class="form__lock" src="./img/lock.svg" alt="" />
+          </div>
+
+          <button class="form__button button button__modal">Register</button>
+        </form>
+
+        <p class="form__text">
+          Already have an account?
+          <a href="#" class="form__link" id="log-link">Login</a>
+        </p>
+      </div>
+
+      <div class="content__modal modal modal-login">
+        <h2 class="modal__title">Welcome Back!!! <span>Login</span></h2>
+        <img class="modal__icon" src="./img/сlose.svg" alt="" />
+        <form class="modal__form form" id="form-log" action="">
+          <div class="form__box">
+            <input
+              class="form__input"
+              type="text"
+              name="email"
+              placeholder="username/email"
+              data-max-length="10"
+              data-min-length="2"
+            />
+            <label class="form__label" for="email">username/email</label>
+          </div>
+
+          <div class="form__box">
+            <input
+              class="form__input"
+              type="password"
+              name="password"
+              placeholder="password"
+              data-min-length="8"
+              data-max-length="16"
+            />
+            <label class="form__label" for="password">password</label>
+            <img class="form__lock" src="./img/lock.svg" alt="" />
+          </div>
+
+          <div class="form__underpass">
+            <div class="form__checkbox">
+              <input type="checkbox" name="remember" id="rememberPass" />
+              <label for="remember">Remember me</label>
+            </div>
+
+            <a href="#" class="form__link-forgot">Forgot password?</a>
+          </div>
+
+          <button class="form__button button button__modal">Login</button>
+        </form>
+
+        <p class="form__text">
+          Don’t have an account?
+          <a href="#" class="form__link" id="reg-link">Register</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
