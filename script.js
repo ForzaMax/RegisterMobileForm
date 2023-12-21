@@ -23,6 +23,7 @@ console.log(logModalFormInputsNode);
 
 document.addEventListener("DOMContentLoaded", () => {
   clearInputs();
+  // rememberedUser();
 });
 
 contentBackground.addEventListener("click", () => {
@@ -118,7 +119,7 @@ function rememberedUser() {
       loginArea.value = rememberedUser.username;
       passwordArea.value = rememberedUser.password;
     }
-  } else return;
+  }
 }
 
 const LS_ITEM_KEY = "userData";
@@ -166,7 +167,6 @@ function saveData() {
 }
 
 logModalFormNode.addEventListener("submit", (e) => {
-  console.log(validationLog());
   if (!validationLog()) {
     e.preventDefault();
   }
@@ -179,13 +179,9 @@ function validationLog() {
 
   const loginArea = logModalFormInputsNode[0];
   const passwordArea = logModalFormInputsNode[1];
-  const rememberedUser = JSON.parse(localStorage.getItem("rememberedUser"));
-
   console.log(loginArea.value, passwordArea.value);
 
   data.forEach((user) => {
-    console.log(user.username, user.password);
-
     if (user.email == loginArea.value && user.password == passwordArea.value) {
       isValid = true;
     }
@@ -195,15 +191,13 @@ function validationLog() {
     alert(`Логин или пароль введены неверно`);
   } else {
     if (rememberPass.checked) {
-      if (!rememberedUser) {
-        localStorage.setItem(
-          "rememberedUser",
-          JSON.stringify({
-            username: loginArea.value,
-            password: passwordArea.value,
-          })
-        );
-      }
+      localStorage.setItem(
+        "rememberedUser",
+        JSON.stringify({
+          username: loginArea.value,
+          password: passwordArea.value,
+        })
+      );
     } else {
       localStorage.removeItem("rememberedUser");
     }
@@ -212,6 +206,7 @@ function validationLog() {
   console.log(`Общая валидация: ${isValid}`);
   return isValid;
 }
+
 console.log(data);
 
 function validationReg() {
