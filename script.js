@@ -44,11 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 contentBackground.addEventListener("click", () => {
-  logModalNode.classList.remove("modal__visible");
-  regModalNode.classList.remove("modal__visible");
+  clearInputs();
 });
 
-// Появление модальных окон на клик  ==============================================
 regBtnNode.addEventListener("click", () => {
   regModalNode.classList.add("modal__visible");
 
@@ -60,35 +58,19 @@ logBtnNode.addEventListener("click", () => {
 });
 
 logLinkNode.addEventListener("click", () => {
-  regModalNode.classList.remove("modal__visible");
-  logModalNode.classList.add("modal__visible");
-
-  inputs.forEach((input) => {
-    input.value = "";
-  });
+  clearInputs();
 });
 
 regLinkNode.addEventListener("click", () => {
-  logModalNode.classList.remove("modal__visible");
-  regModalNode.classList.add("modal__visible");
-
-  inputs.forEach((input) => {
-    input.value = "";
-  });
+  clearInputs();
 });
 
-// Перебор всех кнопок закрытия модального окна
 closeBtnNode.forEach((btn) => {
   btn.addEventListener("click", () => {
-    logModalNode.classList.remove("modal__visible");
-    regModalNode.classList.remove("modal__visible");
-    regModalFormInputsNode.forEach((input) => {
-      input.value = "";
-    });
+    clearInputs();
   });
 });
 
-// Перебор всех кнопок изменения видимости пароля
 for (let lockBtn of lockPasswordNode) {
   // Не мешало бы подисправить
 
@@ -105,7 +87,6 @@ for (let lockBtn of lockPasswordNode) {
   });
 }
 
-// Закрытие модального окна по ESC
 document.addEventListener("keydown", (event) => {
   if (event.code === "Escape") {
     logModalNode.classList.remove("modal__visible");
@@ -116,19 +97,16 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// САБМИТ И ВАЛИДАЦИЯ ==============================================
+function clearInputs() {
+  logModalNode.classList.remove("modal__visible");
+  regModalNode.classList.remove("modal__visible");
 
-// regModalFormInputsNode.forEach((input) => {
-//   input.addEventListener("input", () => {
-//     validateForm(input);
-//   });
-// });
-
-// logModalFormInputsNode.forEach((input) => {
-//   input.addEventListener("input", () => {
-//     validateForm(input);
-//   });
-// });
+  inputs.forEach((input) => {
+    input.value = "";
+    input.classList.remove("form__input-error");
+    input.classList.remove("form__input-valid");
+  });
+}
 
 const LS_ITEM_KEY = "userData";
 let data = JSON.parse(localStorage.getItem(LS_ITEM_KEY, "[]")) || [];
