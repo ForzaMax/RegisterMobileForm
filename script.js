@@ -1,13 +1,3 @@
-// кастомная проверка емейла на собаку и популярные виды почт
-// реализовать глазики
-
-// пароль макс мин количество символов
-// что бы в конфирме было подтверждение пароля
-
-//ЗАДАЧА Реализовать изменение фона при появление модальных окон !!! --- в процессе
-//ЗАДАЧА Выход из модального окна по клику на body
-//ЗАДАЧА При загрузке DOM стирать значения в инпутах
-
 const logBtnNode = document.querySelector(".button-log");
 const regBtnNode = document.querySelector(".button-reg");
 const logModalNode = document.querySelector(".modal-login");
@@ -29,10 +19,28 @@ const contentBackground = document.querySelector(".content__picture");
 const closeBtnNode = Array.from(document.querySelectorAll(".modal__icon"));
 const lockPasswordNode = document.querySelectorAll(".form__lock");
 
+console.log(logModalFormInputsNode);
+
 document.addEventListener("DOMContentLoaded", () => {
   inputs.forEach((input) => {
     input.value = "";
   });
+
+  const rememberedUser = JSON.parse(localStorage.getItem("rememberedUser"));
+
+  console.log(rememberedUser);
+  if (rememberedUser) {
+    const loginArea = logModalFormInputsNode.find(
+      (input) => input.name === "email"
+    );
+    const passwordArea = logModalFormInputsNode.find(
+      (input) => input.name === "password"
+    );
+    if (loginArea && passwordArea) {
+      loginArea.value = rememberedUser.username;
+      passwordArea.value = rememberedUser.password;
+    }
+  }
 });
 
 contentBackground.addEventListener("click", () => {
@@ -171,6 +179,7 @@ logModalFormNode.addEventListener("submit", (e) => {
     e.preventDefault();
   }
 });
+let rememberPass = document.querySelector("#rememberPass");
 
 function validationLog() {
   let isValid = false;
@@ -190,21 +199,23 @@ function validationLog() {
 
   if (!isValid) {
     alert(`Логин или пароль введены неверно`);
+  } else {
+    if (rememberPass.checked) {
+      localStorage.setItem(
+        "rememberedUser",
+        JSON.stringify({
+          username: loginArea.value,
+          password: passwordArea.value,
+        })
+      );
+    } else {
+      localStorage.removeItem("rememberedUser");
+    }
+
+    console.log(`Общая валидация: ${isValid}`);
+    return isValid;
   }
-
-  // let rememberPass = document.querySelector("#rememberPass");
-  // if (rememberPass.checked) {
-  //   localStorage.setItem("username", loginArea.value);
-  //   localStorage.setItem("password", passwordArea.value);
-  // } else {
-  //   localStorage.removeItem("username");
-  //   localStorage.removeItem("password");
-  // }
-
-  console.log(`Общая валидация: ${isValid}`);
-  return isValid;
 }
-
 console.log(data);
 
 function validationReg() {

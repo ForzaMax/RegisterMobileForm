@@ -139,6 +139,10 @@
     line-height: normal;
     text-decoration: none;
 
+    &:hover {
+      text-decoration: underline;
+    }
+
     &-forgot {
       color: #050522;
       font-family: Segoe UI;

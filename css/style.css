@@ -302,6 +302,9 @@ body {
   line-height: normal;
   text-decoration: none;
 }
+.form__link:hover {
+  text-decoration: underline;
+}
 .form__link-forgot {
   color: #050522;
   font-family: Segoe UI;
