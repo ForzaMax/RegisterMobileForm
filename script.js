@@ -22,68 +22,63 @@ const lockPasswordNode = document.querySelectorAll(".form__lock");
 console.log(logModalFormInputsNode);
 
 document.addEventListener("DOMContentLoaded", () => {
-  inputs.forEach((input) => {
-    input.value = "";
-  });
-
-  const rememberedUser = JSON.parse(localStorage.getItem("rememberedUser"));
-
-  console.log(rememberedUser);
-  if (rememberedUser) {
-    const loginArea = logModalFormInputsNode.find(
-      (input) => input.name === "email"
-    );
-    const passwordArea = logModalFormInputsNode.find(
-      (input) => input.name === "password"
-    );
-    if (loginArea && passwordArea) {
-      loginArea.value = rememberedUser.username;
-      passwordArea.value = rememberedUser.password;
-    }
-  }
+  clearInputs();
 });
 
 contentBackground.addEventListener("click", () => {
+  logModalNode.classList.remove("modal__visible");
+  regModalNode.classList.remove("modal__visible");
+
   clearInputs();
 });
 
 regBtnNode.addEventListener("click", () => {
   regModalNode.classList.add("modal__visible");
-
   contentBackground.style.backgroundColor = "rgba(5, 5, 34, 0.50)";
 });
 
 logBtnNode.addEventListener("click", () => {
+  regModalNode.classList.remove("modal__visible");
   logModalNode.classList.add("modal__visible");
+
+  rememberedUser();
 });
 
 logLinkNode.addEventListener("click", () => {
+  regModalNode.classList.remove("modal__visible");
   clearInputs();
+  logModalNode.classList.add("modal__visible");
 });
 
 regLinkNode.addEventListener("click", () => {
+  logModalNode.classList.remove("modal__visible");
   clearInputs();
+  regModalNode.classList.add("modal__visible");
 });
 
 closeBtnNode.forEach((btn) => {
   btn.addEventListener("click", () => {
+    logModalNode.classList.remove("modal__visible");
+    regModalNode.classList.remove("modal__visible");
     clearInputs();
   });
 });
 
-for (let lockBtn of lockPasswordNode) {
-  // Не мешало бы подисправить
+console.log(lockPasswordNode);
 
-  lockBtn.addEventListener("click", () => {
-    inputs.forEach((input, index) => {
-      if (input.name.includes("password")) {
-        if (input.type === "password") {
-          input.type = "text";
+for (let lockBtn of lockPasswordNode) {
+  lockBtn.addEventListener("click", function () {
+    const parent = lockBtn.parentNode;
+    if (parent) {
+      const passwordInput = parent.querySelector('input[name*="password"]');
+      if (passwordInput) {
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
         } else {
-          input.type = "password";
+          passwordInput.type = "password";
         }
       }
-    });
+    }
   });
 }
 
@@ -98,14 +93,32 @@ document.addEventListener("keydown", (event) => {
 });
 
 function clearInputs() {
-  logModalNode.classList.remove("modal__visible");
-  regModalNode.classList.remove("modal__visible");
+  // logModalNode.classList.remove("modal__visible");
+  // regModalNode.classList.remove("modal__visible");
 
   inputs.forEach((input) => {
     input.value = "";
     input.classList.remove("form__input-error");
     input.classList.remove("form__input-valid");
   });
+}
+
+function rememberedUser() {
+  const rememberedUser = JSON.parse(localStorage.getItem("rememberedUser"));
+  console.log(rememberedUser);
+
+  if (rememberedUser) {
+    const loginArea = logModalFormInputsNode.find(
+      (input) => input.name === "email"
+    );
+    const passwordArea = logModalFormInputsNode.find(
+      (input) => input.name === "password"
+    );
+    if (loginArea && passwordArea) {
+      loginArea.value = rememberedUser.username;
+      passwordArea.value = rememberedUser.password;
+    }
+  } else return;
 }
 
 const LS_ITEM_KEY = "userData";
@@ -153,10 +166,12 @@ function saveData() {
 }
 
 logModalFormNode.addEventListener("submit", (e) => {
+  console.log(validationLog());
   if (!validationLog()) {
     e.preventDefault();
   }
 });
+
 let rememberPass = document.querySelector("#rememberPass");
 
 function validationLog() {
@@ -164,6 +179,7 @@ function validationLog() {
 
   const loginArea = logModalFormInputsNode[0];
   const passwordArea = logModalFormInputsNode[1];
+  const rememberedUser = JSON.parse(localStorage.getItem("rememberedUser"));
 
   console.log(loginArea.value, passwordArea.value);
 
@@ -179,20 +195,22 @@ function validationLog() {
     alert(`Логин или пароль введены неверно`);
   } else {
     if (rememberPass.checked) {
-      localStorage.setItem(
-        "rememberedUser",
-        JSON.stringify({
-          username: loginArea.value,
-          password: passwordArea.value,
-        })
-      );
+      if (!rememberedUser) {
+        localStorage.setItem(
+          "rememberedUser",
+          JSON.stringify({
+            username: loginArea.value,
+            password: passwordArea.value,
+          })
+        );
+      }
     } else {
       localStorage.removeItem("rememberedUser");
     }
-
-    console.log(`Общая валидация: ${isValid}`);
-    return isValid;
   }
+
+  console.log(`Общая валидация: ${isValid}`);
+  return isValid;
 }
 console.log(data);
 

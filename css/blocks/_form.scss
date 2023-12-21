@@ -63,6 +63,10 @@
 
     right: 15px;
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   &__underpass {
@@ -83,8 +87,11 @@
       width: 20px;
       height: 20px;
       opacity: 0;
-
       z-index: 1;
+
+      &:hover {
+        cursor: pointer;
+      }
 
       &:checked + label::before {
         background: #53b4ff;
@@ -98,6 +105,10 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+
+      &:hover {
+        cursor: pointer;
+      }
 
       &::before {
         content: "";
@@ -141,6 +152,7 @@
 
     &:hover {
       text-decoration: underline;
+      opacity: 0.8;
     }
 
     &-forgot {
@@ -151,6 +163,11 @@
       font-weight: 400;
       line-height: normal;
       text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+      }
     }
   }
 }

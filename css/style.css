@@ -177,6 +177,9 @@ body {
   right: 25px;
   cursor: pointer;
 }
+.modal__icon:hover {
+  opacity: 0.8;
+}
 .modal__form {
   margin-top: 36px;
   display: flex;
@@ -240,6 +243,9 @@ body {
   right: 15px;
   cursor: pointer;
 }
+.form__lock:hover {
+  opacity: 0.8;
+}
 .form__underpass {
   display: flex;
   align-items: center;
@@ -258,6 +264,9 @@ body {
   opacity: 0;
   z-index: 1;
 }
+.form__checkbox input:hover {
+  cursor: pointer;
+}
 .form__checkbox input:checked + label::before {
   background: #53b4ff;
 }
@@ -268,6 +277,9 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.form__checkbox label:hover {
+  cursor: pointer;
 }
 .form__checkbox label::before {
   content: "";
@@ -304,6 +316,7 @@ body {
 }
 .form__link:hover {
   text-decoration: underline;
+  opacity: 0.8;
 }
 .form__link-forgot {
   color: #050522;
@@ -313,4 +326,8 @@ body {
   font-weight: 400;
   line-height: normal;
   text-decoration: none;
+}
+.form__link-forgot:hover {
+  text-decoration: underline;
+  opacity: 0.8;
 }/*# sourceMappingURL=style.css.map */
