@@ -23,7 +23,8 @@
   &__picture {
     display: block;
     margin: 0 auto;
-    background-blend-mode: overlay;
+
+    // возможно стоит её бэкграундом сделать для затемнения при появление модальных окон
   }
 
   &__wrapper {
